@@ -1,0 +1,7 @@
+# Ignore temporary files
+temp/
+tmp/
+*.lck
+*.tmp
+*.pid
+*.swp
