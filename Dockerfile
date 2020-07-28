@@ -1,5 +1,8 @@
 FROM ubuntu:16.04
+ARG serverip
 WORKDIR /work
+
+# ======= Installs for DNAS responses
 RUN apt-get update && apt-get install -y \
   libssl-dev ssl-cert php7.0 libapache2-mod-php7.0 \
   wget unzip php7.0-mcrypt libmcrypt-dev \
@@ -19,8 +22,22 @@ RUN cp -r /work/DNASrep/www/dnas /var/www/dnas \
   && ln -sf /proc/self/fd/1 /var/log/apache2/access.log \
   && ln -sf /proc/self/fd/1 /var/log/apache2/error.log
 ADD ./dnas.conf /etc/apache2/sites-available/dnas.conf
+
+# ======= Installs for DNS Bind server
+RUN apt-get update && apt-get install bind9 bind9utils bind9-doc dnsutils -y
+
+ADD ./dns_files/db.dnas.rpz /etc/bind/db.dnas.rpz
+ADD ./dns_files/named.conf.local /etc/bind/named.conf.local
+ADD ./dns_files/named.conf.options /etc/bind/named.conf.options
+
+RUN sed -i "s/SERVER_IP/${serverip}/g" /etc/bind/db.dnas.rpz
+
+# DNAS Port
+EXPOSE 443
+# DNS Server port
+EXPOSE 53/udp 53/tcp
+
 ADD ./entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-EXPOSE 443
 CMD ["/entrypoint.sh"]

@@ -1,0 +1,16 @@
+$TTL 60
+@            IN    SOA  localhost. root.localhost.  (
+                          2015112501   ; serial
+                          1h           ; refresh
+                          30m          ; retry
+                          1w           ; expiry
+                          30m)         ; minimum
+                   IN     NS    localhost.
+
+gate1.us.dnas.playstation.org    A        SERVER_IP
+gate1.jp.dnas.playstation.org    A        SERVER_IP
+gate1.eu.dnas.playstation.org    A        SERVER_IP
+ratchet3-prod1.pdonline.scea.com    A        SERVER_IP
+randc3-master.online.scee.com    A        SERVER_IP
+nightcrawler.insomniacgames.com    A        SERVER_IP
+ratchet3-pubeta.pdonline.scea.com    A        SERVER_IP

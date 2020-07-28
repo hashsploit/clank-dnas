@@ -1,3 +1,6 @@
 #!/bin/bash
+
+# Reset the docker image
 docker rmi dnas-test
-docker build --rm --tag dnas-test .
+# Pass in the server IP
+docker build --rm --tag dnas-test --build-arg serverip=${server_ip} .
