@@ -1,4 +1,4 @@
-# DNAS Test
+![Clank-DNAS Logo](clank-dnas-logo.png)
 
 This project builds a Docker image for a DNAS server based on FogNo23's [DNASrep](https://github.com/FogNo23/DNASrep/) repo.
 
